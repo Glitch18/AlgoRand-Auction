@@ -190,9 +190,9 @@ def placeBid(client: AlgodClient, appID: int, bidder: Account, bidAmount: int) -
 
     nftID = appGlobalState[b"nft_id"]
 
-    if any(appGlobalState[b"bid_account"]):
+    if any(appGlobalState[b"current_bid_account"]):
         # if "bid_account" is not the zero address
-        prevBidLeader = encoding.encode_address(appGlobalState[b"bid_account"])
+        prevBidLeader = encoding.encode_address(appGlobalState[b"current_bid_account"])
     else:
         prevBidLeader = None
 
@@ -250,9 +250,9 @@ def closeAuction(client: AlgodClient, appID: int, closer: Account):
 
     accounts: List[str] = [encoding.encode_address(appGlobalState[b"seller"])]
 
-    if any(appGlobalState[b"bid_account"]):
+    if any(appGlobalState[b"current_bid_account"]):
         # if "bid_account" is not the zero address
-        accounts.append(encoding.encode_address(appGlobalState[b"bid_account"]))
+        accounts.append(encoding.encode_address(appGlobalState[b"current_bid_account"]))
 
     deleteTxn = transaction.ApplicationDeleteTxn(
         sender=closer.getAddress(),

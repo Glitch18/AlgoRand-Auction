@@ -64,12 +64,12 @@ def approval_program():
 
     on_create = Seq(
         App.globalPut(seller_key, Txn.application_args[0]),
-        App.globalPut(nft_id_key, Txn.application_args[1]),
+        App.globalPut(nft_id_key, Btoi(Txn.application_args[1])),
         App.globalPut(auction_start_time_key, Btoi(Txn.application_args[2])),
         App.globalPut(auction_end_time_key, Btoi(Txn.application_args[3])),
-        App.globalPut(base_price_key, Txn.application_args[4]),
+        App.globalPut(base_price_key, Btoi(Txn.application_args[4])),
         App.globalPut(current_bid_account_key, Global.zero_address()),
-        App.globalPut(current_bid_amount_key, Txn.application_args[4]),
+        App.globalPut(current_bid_amount_key, Btoi(Txn.application_args[4])),
         Assert(
             And(
                 Global.latest_timestamp() < Btoi(Txn.application_args[2]),

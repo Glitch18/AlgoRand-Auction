@@ -46,8 +46,7 @@ def simple_auction():
         nftID=nftID,
         startTime=startTime,
         endTime=endTime,
-        reserve=reserve,
-        minBidIncrement=increment,
+        basePrice=reserve,
     )
     print(
         "Done. The auction app ID is",
